@@ -1,8 +1,14 @@
 package jsoncached
 
-import "testing"
+import (
+	"encoding/json"
+	"testing"
+)
 
 func TestSet(t *testing.T) {
 	Set("name2", "hisheng1112222221")
-	t.Log(Get("name2"))
+
+	s, _ := json.Marshal([]string{"sss", "133", "海生"})
+	SetByte("name21", s)
+	t.Log(Get("name21"))
 }

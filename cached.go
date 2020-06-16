@@ -6,7 +6,8 @@ import (
 
 const dir = "./cached/"
 
-type cached struct {
+type SetFiler interface {
+	SetFile()
 }
 
 func GetFile(key string) string {
@@ -27,9 +28,22 @@ func SetFile(key, val string) bool {
 	return WriteFile(fileName, val)
 }
 
+func SetFileByte(key string, val []byte) bool {
+	fileName := GetFileName(key)
+	return WriteFileByte(fileName, val)
+}
+
 func WriteFile(fileName, val string) bool {
 	var d = []byte(val)
 	err := ioutil.WriteFile(fileName, d, 0666)
+	if err != nil {
+		return false
+	}
+	return true
+}
+
+func WriteFileByte(fileName string, val []byte) bool {
+	err := ioutil.WriteFile(fileName, val, 0666)
 	if err != nil {
 		return false
 	}

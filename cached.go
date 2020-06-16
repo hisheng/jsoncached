@@ -28,7 +28,7 @@ func SetFile(key, val string) bool {
 	return WriteFile(fileName, val)
 }
 
-func SetFileByte(key string, val []byte) bool {
+func SetFileByte(key string, val []byte) error {
 	fileName := GetFileName(key)
 	return WriteFileByte(fileName, val)
 }

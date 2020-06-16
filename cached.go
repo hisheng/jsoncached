@@ -28,7 +28,7 @@ func SetFile(key, val string) bool {
 	return WriteFile(fileName, val)
 }
 
-func SetFileByte(key string, val []byte) error {
+func SetFileByte(key string, val []byte) bool {
 	fileName := GetFileName(key)
 	return WriteFileByte(fileName, val)
 }
@@ -42,12 +42,12 @@ func WriteFile(fileName, val string) bool {
 	return true
 }
 
-func WriteFileByte(fileName string, val []byte) error {
+func WriteFileByte(fileName string, val []byte) bool {
 	err := ioutil.WriteFile(fileName, val, 0666)
 	if err != nil {
-		return err
+		return false
 	}
-	return err
+	return true
 }
 
 func GetFileName(key string) string {

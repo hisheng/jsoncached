@@ -6,12 +6,22 @@ import (
 
 const dir = "./cached/"
 
-func getFile(key string) string {
+func getFile(key string) []byte {
 	file := getFileName(key)
 	return readFile(file)
 }
 
-func readFile(file string) string {
+func getFileString(key string) string {
+	file := getFileName(key)
+	return readFileString(file)
+}
+
+func readFile(file string) []byte {
+	f, _ := ioutil.ReadFile(file)
+	return f
+}
+
+func readFileString(file string) string {
 	f, err := ioutil.ReadFile(file)
 	if err != nil {
 		return ""

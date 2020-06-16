@@ -6,7 +6,7 @@ import (
 )
 
 func TestSet(t *testing.T) {
-	Set("name2", "hisheng1112222221")
+	SetString("name2", "hisheng1112222221")
 
 	s, _ := json.Marshal([]string{"sss", "133", "海生"})
 	SetByte("name21", s)

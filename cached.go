@@ -6,16 +6,12 @@ import (
 
 const dir = "./cached/"
 
-type SetFiler interface {
-	SetFile()
+func getFile(key string) string {
+	file := getFileName(key)
+	return readFile(file)
 }
 
-func GetFile(key string) string {
-	file := GetFileName(key)
-	return ReadFile(file)
-}
-
-func ReadFile(file string) string {
+func readFile(file string) string {
 	f, err := ioutil.ReadFile(file)
 	if err != nil {
 		return ""
@@ -23,17 +19,17 @@ func ReadFile(file string) string {
 	return string(f)
 }
 
-func SetFile(key, val string) bool {
-	fileName := GetFileName(key)
-	return WriteFile(fileName, val)
+func setFile(key, val string) bool {
+	fileName := getFileName(key)
+	return writeFile(fileName, val)
 }
 
-func SetFileByte(key string, val []byte) bool {
-	fileName := GetFileName(key)
-	return WriteFileByte(fileName, val)
+func setFileByte(key string, val []byte) bool {
+	fileName := getFileName(key)
+	return writeFileByte(fileName, val)
 }
 
-func WriteFile(fileName, val string) bool {
+func writeFile(fileName, val string) bool {
 	var d = []byte(val)
 	err := ioutil.WriteFile(fileName, d, 0666)
 	if err != nil {
@@ -42,7 +38,7 @@ func WriteFile(fileName, val string) bool {
 	return true
 }
 
-func WriteFileByte(fileName string, val []byte) bool {
+func writeFileByte(fileName string, val []byte) bool {
 	err := ioutil.WriteFile(fileName, val, 0666)
 	if err != nil {
 		return false
@@ -50,6 +46,6 @@ func WriteFileByte(fileName string, val []byte) bool {
 	return true
 }
 
-func GetFileName(key string) string {
+func getFileName(key string) string {
 	return dir + key + ".json"
 }
